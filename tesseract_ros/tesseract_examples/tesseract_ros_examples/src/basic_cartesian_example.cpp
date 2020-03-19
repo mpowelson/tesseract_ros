@@ -114,7 +114,7 @@ bool BasicCartesianExample::addPointCloud()
   link_octomap.collision.push_back(collision);
 
   Joint joint_octomap("joint_octomap_attached");
-  joint_octomap.parent_link_name = "base_link";
+  joint_octomap.parent_link_name = "world";
   joint_octomap.child_link_name = link_octomap.getName();
   joint_octomap.type = JointType::FIXED;
 
@@ -145,8 +145,18 @@ TrajOptProb::Ptr BasicCartesianExample::cppMethod()
     start_pos[cnt] = current_state->joints.at(j);
     ++cnt;
   }
+  Eigen::VectorXd end_pos;
+  end_pos.resize(pci.kin->numJoints());
+  end_pos << 2.31181,  0.762788,   2.57369,   1.43888,   1.08853,  -1.52381,  2.40295;
 
-  pci.init_info.type = InitInfo::STATIONARY;
+  pci.init_info.type = InitInfo::GIVEN_TRAJ;
+  pci.init_info.data = tesseract_common::TrajArray(steps_, pci.kin->numJoints());
+  for (unsigned idof = 0; idof < pci.kin->numJoints(); ++idof)
+  {
+    pci.init_info.data.col(idof) = Eigen::VectorXd::LinSpaced(steps_, start_pos[idof], end_pos[idof]);
+  }
+
+  pci.init_info.type = InitInfo::GIVEN_TRAJ;
   pci.init_info.data = start_pos.transpose().replicate(pci.basic_info.n_steps, 1);
 
   // Populate Cost Info
@@ -165,22 +175,55 @@ TrajOptProb::Ptr BasicCartesianExample::cppMethod()
   collision->evaluator_type = trajopt::CollisionEvaluatorType::SINGLE_TIMESTEP;
   collision->first_step = 0;
   collision->last_step = pci.basic_info.n_steps - 1;
-  collision->info = createSafetyMarginDataVector(pci.basic_info.n_steps, 0.025, 20);
+  collision->info = createSafetyMarginDataVector(pci.basic_info.n_steps, 0.025, 1);
+  pci.cost_infos.push_back(collision);
 
   // Populate Constraints
-  double delta = 0.5 / pci.basic_info.n_steps;
-  for (auto i = 0; i < pci.basic_info.n_steps; ++i)
+//  double delta = 0.5 / pci.basic_info.n_steps;
+//  for (auto i = 0; i < pci.basic_info.n_steps; ++i)
+//  {
+//    auto pose = std::make_shared<CartPoseTermInfo>();
+//    pose->term_type = TT_COST;
+//    pose->name = "waypoint_cart_" + std::to_string(i);
+//    pose->link = "/wrist_palm_stump_link";
+//    pose->timestep = i;
+//    pose->xyz = Eigen::Vector3d(0.5, -0.2 + delta * i, 0.62);
+//    pose->wxyz = Eigen::Vector4d(0.0, 0.0, 1.0, 0.0);
+//    pose->pos_coeffs = Eigen::Vector3d(10, 10, 10);
+//    pose->rot_coeffs = Eigen::Vector3d(10, 10, 10);
+//    pci.cost_infos.push_back(pose);
+//  }
+//  {
+//    auto pose = std::make_shared<JointPosTermInfo>;
+
+//    pci.cnt_info.push_back(pose);
+//  }
+
+
   {
     auto pose = std::make_shared<CartPoseTermInfo>();
-    pose->term_type = TT_CNT;
-    pose->name = "waypoint_cart_" + std::to_string(i);
-    pose->link = "tool0";
-    pose->timestep = i;
-    pose->xyz = Eigen::Vector3d(0.5, -0.2 + delta * i, 0.62);
+    pose->term_type = TT_COST;
+    pose->name = "waypoint_cart_" + std::to_string(0);
+    pose->link = "/wrist_palm_stump_link";
+    pose->timestep = 0;
+    pose->xyz = Eigen::Vector3d(0.8, -0.2, 0.62);
     pose->wxyz = Eigen::Vector4d(0.0, 0.0, 1.0, 0.0);
-    pose->pos_coeffs = Eigen::Vector3d(10, 10, 10);
-    pose->rot_coeffs = Eigen::Vector3d(10, 10, 10);
-    pci.cnt_infos.push_back(pose);
+    pose->pos_coeffs = Eigen::Vector3d(100, 100, 100);
+    pose->rot_coeffs = Eigen::Vector3d(100, 100, 100);
+    pci.cost_infos.push_back(pose);
+  }
+
+  {
+    auto pose = std::make_shared<CartPoseTermInfo>();
+    pose->term_type = TT_COST;
+    pose->name = "waypoint_cart_" + std::to_string(pci.basic_info.n_steps - 1);
+    pose->link = "/wrist_palm_stump_link";
+    pose->timestep = pci.basic_info.n_steps - 1;
+    pose->xyz = Eigen::Vector3d(0.0, -1.0, 0.42);
+    pose->wxyz = Eigen::Vector4d(0.0, 0.0, 1.0, 0.0);
+    pose->pos_coeffs = Eigen::Vector3d(100, 100, 100);
+    pose->rot_coeffs = Eigen::Vector3d(100, 100, 100);
+    pci.cost_infos.push_back(pose);
   }
 
   return ConstructProblem(pci);
@@ -210,8 +253,8 @@ bool BasicCartesianExample::run()
   }
 
   // Create octomap and add it to the local environment
-  if (!addPointCloud())
-    return false;
+//  if (!addPointCloud())
+//    return false;
 
   if (rviz_)
   {
@@ -225,18 +268,24 @@ bool BasicCartesianExample::run()
 
   // Set the robot initial state
   std::unordered_map<std::string, double> ipos;
-  ipos["joint_a1"] = -0.4;
-  ipos["joint_a2"] = 0.2762;
-  ipos["joint_a3"] = 0.0;
-  ipos["joint_a4"] = -1.3348;
-  ipos["joint_a5"] = 0.0;
-  ipos["joint_a6"] = 1.4959;
-  ipos["joint_a7"] = 0.0;
+//  ipos["joint_a1"] = -0.4;
+//  ipos["joint_a2"] = 0.2762;
+//  ipos["joint_a3"] = 0.0;
+//  ipos["joint_a4"] = -1.3348;
+//  ipos["joint_a5"] = 0.0;
+//  ipos["joint_a6"] = 1.4959;
+//  ipos["joint_a7"] = 0.0;
+  std::vector<double> vals = { 1.36577,   -1.52841,   0.257673,  -0.703934,       1.25,     1.5707,   0.634765};
 
-  tesseract_->getEnvironment()->setState(ipos);
+
+
+//  tesseract_->getEnvironment()->getJointNames()
+tesseract_->getEnvironment()->setState(tesseract_->getFwdKinematicsManager()->getFwdKinematicSolver("manipulator")->getJointNames(), vals);
+std::cout << "Joints: " << tesseract_->getFwdKinematicsManager()->getFwdKinematicSolver("manipulator")->getJointNames().size() << std::endl;
+//  tesseract_->getEnvironment()->setState(ipos);
 
   // Set Log Level
-  util::gLogLevel = util::LevelError;
+  util::gLogLevel = util::LevelInfo;
 
   // Setup Problem
   TrajOptProb::Ptr prob;
@@ -281,6 +330,7 @@ bool BasicCartesianExample::run()
   collisions.clear();
   found = checkTrajectory(
       collisions, *manager, *state_solver, prob->GetKin()->getJointNames(), getTraj(opt.x(), prob->GetVars()));
+  std::cout << getTraj(opt.x(), prob->GetVars());
 
   ROS_INFO((found) ? ("Final trajectory is in collision") : ("Final trajectory is collision free"));
 

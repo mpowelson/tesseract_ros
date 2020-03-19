@@ -69,122 +69,51 @@ Visualization Manager:
         Topic: /joint_states
         Value: ""
       Links:
-        All Links Enabled: true
-        Expand Joint Details: false
-        Expand Link Details: false
-        Expand Tree: false
-        Link Tree Style: Links in Alphabetic Order
-        base:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        base_link:
+        /base_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        ee_base:
+        /forearm_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        ee_mount:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        grinder_base:
+        /forearm_link2:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        grinder_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        iiwa_base:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        iiwa_base_link:
+        /shoulder_pitch_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        iiwa_link_1:
+        /shoulder_yaw_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        iiwa_link_2:
+        /upper_arm_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        iiwa_link_3:
+        /wrist_palm_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        iiwa_link_4:
+        /wrist_palm_stump_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        /wrist_pitch_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        iiwa_link_5:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        iiwa_link_6:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        iiwa_link_7:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        iiwa_mount:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        iiwa_tool0:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        link_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        link_2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        link_3:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        link_4:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        link_5:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        link_6:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        link_grinder:
+        /wrist_yaw_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -197,19 +126,21 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        table:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        stewart_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        tool0:
+        terrain:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        tool1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
+          Value: true
         world:
           Alpha: 1
           Show Axes: false
@@ -231,168 +162,13 @@ Visualization Manager:
         {}
       Queue Size: 100
       Value: true
-    - Class: tesseract_rviz/TesseractState
+    - Class: rviz/MarkerArray
       Enabled: true
-      Environment:
-        Alpha: 1
-        Interface Namespace: env_widget_1/
-        Show All Links: true
-        Show Collision: false
-        Show Highlights: true
-        Show Visual: true
-        Tesseract State Topic: /monitored_environment
-        URDF Description: robot_description
-        Value: ""
-      Joint State Monitor:
-        Topic: /joint_states
-        Value: ""
-      Links:
-        All Links Enabled: true
-        Expand Joint Details: false
-        Expand Link Details: false
-        Expand Tree: false
-        Link Tree Style: Links in Alphabetic Order
-        base:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        ee_base:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        ee_mount:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        grinder_base:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        grinder_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        iiwa_base:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        iiwa_base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        iiwa_link_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        iiwa_link_2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        iiwa_link_3:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        iiwa_link_4:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        iiwa_link_5:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        iiwa_link_6:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        iiwa_link_7:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        iiwa_mount:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        iiwa_tool0:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        link_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        link_2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        link_3:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        link_4:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        link_5:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        link_6:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        link_grinder:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        link_grinder_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        part:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        table:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tool0:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        tool1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        world:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-      Name: TesseractState
+      Marker Topic: /trajopt/display_axes
+      Name: MarkerArray
+      Namespaces:
+        trajopt: true
+      Queue Size: 100
       Value: true
   Enabled: true
   Global Options:
@@ -437,10 +213,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.39539840817451477
+      Pitch: 0.18039847910404205
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 5.648575782775879
+      Yaw: 3.1535727977752686
     Saved: ~
 Window Geometry:
   Displays:
