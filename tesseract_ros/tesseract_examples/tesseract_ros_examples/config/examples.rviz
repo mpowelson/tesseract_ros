@@ -117,20 +117,17 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        link_grinder_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        part:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
           Value: true
         All Links Enabled: true
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
+        rock:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         stewart_link:
           Alpha: 1
           Show Axes: false
@@ -159,7 +156,7 @@ Visualization Manager:
       Marker Topic: /trajopt/display_collisions
       Name: MarkerArray
       Namespaces:
-        {}
+        trajopt: true
       Queue Size: 100
       Value: true
     - Class: rviz/MarkerArray
@@ -169,6 +166,53 @@ Visualization Manager:
       Namespaces:
         trajopt: true
       Queue Size: 100
+      Value: true
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: /trajopt/display_arrows
+      Name: MarkerArray
+      Namespaces:
+        trajopt: true
+      Queue Size: 100
+      Value: true
+    - Class: rviz/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+        base_link:
+          Value: true
+        forearm_link:
+          Value: true
+        forearm_link2:
+          Value: true
+        rock:
+          Value: true
+        stewart_link:
+          Value: true
+        terrain:
+          Value: true
+        world:
+          Value: true
+        wrist_palm_link:
+          Value: true
+        wrist_palm_stump_link:
+          Value: true
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        world:
+          rock:
+            {}
+          stewart_link:
+            base_link:
+              {}
+          terrain:
+            {}
+      Update Interval: 0
       Value: true
   Enabled: true
   Global Options:
@@ -198,25 +242,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 3.8008627891540527
+      Distance: 2.943387985229492
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.11116494983434677
-        Y: 0.4889374375343323
-        Z: 0.8838350772857666
+        X: 0.02208893373608589
+        Y: -0.33040112257003784
+        Z: 0.15575383603572845
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.18039847910404205
+      Pitch: 0.850398600101471
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.1535727977752686
+      Yaw: 3.8935821056365967
     Saved: ~
 Window Geometry:
   Displays:

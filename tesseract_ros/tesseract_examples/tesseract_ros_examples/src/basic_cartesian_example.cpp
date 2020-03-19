@@ -175,7 +175,7 @@ TrajOptProb::Ptr BasicCartesianExample::cppMethod()
   collision->evaluator_type = trajopt::CollisionEvaluatorType::SINGLE_TIMESTEP;
   collision->first_step = 0;
   collision->last_step = pci.basic_info.n_steps - 1;
-  collision->info = createSafetyMarginDataVector(pci.basic_info.n_steps, 0.025, 1);
+  collision->info = createSafetyMarginDataVector(pci.basic_info.n_steps, 0.1, 1);
   pci.cost_infos.push_back(collision);
 
   // Populate Constraints
