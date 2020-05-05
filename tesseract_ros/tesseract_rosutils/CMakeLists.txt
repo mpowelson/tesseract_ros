@@ -7,6 +7,7 @@ find_package(catkin REQUIRED COMPONENTS
   eigen_conversions
   geometry_msgs
   std_msgs
+  interactive_marker
 )
 
 find_package(Eigen3 REQUIRED)
@@ -23,7 +24,8 @@ catkin_package(
   INCLUDE_DIRS
     include
     ${EIGEN3_INCLUDE_DIRS}
-#  LIBRARIES
+  LIBRARIES
+    ${PROJECT_NAME}_interactive_transform
   CATKIN_DEPENDS
     tesseract_msgs
     roscpp
@@ -53,8 +55,20 @@ target_include_directories(${PROJECT_NAME} SYSTEM INTERFACE
     ${catkin_INCLUDE_DIRS}
     ${EIGEN3_INCLUDE_DIRS})
 
+add_library(${PROJECT_NAME}_interactive_transform SHARED src/interactive_transform.cpp)
+target_link_libraries(${PROJECT_NAME}_interactive_transform PUBLIC tesseract::tesseract_scene_graph tesseract::tesseract_geometry tesseract::tesseract_collision_core tesseract::tesseract_visualization tesseract::tesseract_common tesseract::tesseract_process_planners tesseract::tesseract_motion_planners_core ${catkin_LIBRARIES})
+tesseract_target_compile_options(${PROJECT_NAME}_interactive_transform PUBLIC)
+tesseract_clang_tidy(${PROJECT_NAME}_interactive_transform)
+target_include_directories(${PROJECT_NAME}_interactive_transform PUBLIC
+    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+    "$<INSTALL_INTERFACE:include>")
+target_include_directories(${PROJECT_NAME}_interactive_transform PUBLIC
+    ${catkin_INCLUDE_DIRS}
+    ${EIGEN3_INCLUDE_DIRS})
+
+
 install(
-  TARGETS ${PROJECT_NAME}
+  TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_interactive_transform
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
