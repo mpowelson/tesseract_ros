@@ -48,6 +48,8 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
+add_compile_options(-std=c++14)
+
 # Tesseract ROS Nodes
 add_executable(${PROJECT_NAME}_contacts_node src/contact_monitor_node.cpp)
 target_link_libraries(${PROJECT_NAME}_contacts_node PRIVATE tesseract::tesseract ${PROJECT_NAME}_contacts ${catkin_LIBRARIES})

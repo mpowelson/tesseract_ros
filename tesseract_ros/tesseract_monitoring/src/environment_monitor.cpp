@@ -294,8 +294,7 @@ void EnvironmentMonitor::startPublishingEnvironment(EnvironmentUpdateType update
   {
     environment_publisher_ = nh_.advertise<tesseract_msgs::TesseractState>(environment_topic, 100, false);
     ROS_INFO_NAMED(LOGNAME, "Publishing maintained environment on '%s'", environment_topic.c_str());
-    publish_environment_ =
-        std::make_unique<boost::thread>(boost::bind(&EnvironmentMonitor::environmentPublishingThread, this));
+    publish_environment_.reset(new boost::thread(boost::bind(&EnvironmentMonitor::environmentPublishingThread, this)));
   }
 }
 
