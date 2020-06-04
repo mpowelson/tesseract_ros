@@ -153,7 +153,7 @@ public:
   {
     return tesseract_->getEnvironment()->getSceneGraph();
   }
-  const tesseract_scene_graph::SRDFModel::ConstPtr& getSRDF() const { return tesseract_->getSRDFModel(); }
+  const tesseract_scene_graph::SRDFModel::ConstPtr& getSRDF() const { return tesseract_->getSRDFModelConst(); }
   /** @brief <b>Avoid this function!</b>  Returns an @b
    *         unsafe pointer to the current planning scene.
    * @warning Most likely you do not want to call this function
