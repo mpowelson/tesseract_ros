@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.5.0)
 project(tesseract_monitoring)
 
+add_compile_options(-std=c++14)
 find_package(tesseract REQUIRED)
 find_package(orocos_kdl REQUIRED)
 find_package(tesseract_common REQUIRED)
@@ -20,7 +21,7 @@ find_package(catkin REQUIRED COMPONENTS
 generate_dynamic_reconfigure_options(
   cfg/EnvironmentMonitorDynamicReconfigure.cfg
 )
-
+add_compile_options(-std=c++14)
 catkin_package(
   INCLUDE_DIRS
     include
@@ -47,7 +48,7 @@ include_directories(
   include
   ${catkin_INCLUDE_DIRS}
 )
-
+add_compile_options(-std=c++14)
 # Tesseract ROS Nodes
 add_executable(${PROJECT_NAME}_contacts_node src/contact_monitor_node.cpp)
 target_link_libraries(${PROJECT_NAME}_contacts_node PRIVATE tesseract::tesseract ${PROJECT_NAME}_contacts ${catkin_LIBRARIES})
