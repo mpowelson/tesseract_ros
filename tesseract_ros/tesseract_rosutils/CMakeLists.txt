@@ -17,7 +17,7 @@ find_package(tesseract_visualization REQUIRED)
 find_package(tesseract_collision REQUIRED)
 find_package(tesseract_common REQUIRED)
 find_package(tesseract_motion_planners REQUIRED)
-find_package(tesseract_process_planners REQUIRED)
+#find_package(tesseract_process_planners REQUIRED)
 
 
 catkin_package(
@@ -40,7 +40,7 @@ catkin_package(
     tesseract_visualization
     tesseract_collision
     tesseract_common
-    tesseract_process_planners
+#    tesseract_process_planners
     tesseract_motion_planners
 )
 
