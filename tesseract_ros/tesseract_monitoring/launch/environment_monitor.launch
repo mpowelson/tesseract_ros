@@ -9,11 +9,6 @@
   <arg name="rate" default="60"/>
   <arg name="use_gui" default="false"/>
 
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
-    <param name="rate" value="$(arg rate)"/>
-    <param name="use_gui" value="$(arg use_gui)" />
-  </node>
-
   <node pkg="tesseract_monitoring" type="tesseract_monitoring_environment_node" name="tesseract_monitoring_environment">
     <param name="robot_description" type="string" value="$(arg robot_description)"/>
     <param name="plugin" type="string" value="$(arg plugin)"/>

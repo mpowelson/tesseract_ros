@@ -26,6 +26,7 @@ catkin_package(
     include
   LIBRARIES
     ${PROJECT_NAME}_environment
+    ${PROJECT_NAME}_environment_shadow
     ${PROJECT_NAME}_contacts
   CATKIN_DEPENDS
     roscpp
@@ -72,6 +73,14 @@ target_include_directories(${PROJECT_NAME}_environment PUBLIC "$<BUILD_INTERFACE
 target_include_directories(${PROJECT_NAME}_environment SYSTEM PUBLIC ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
 add_dependencies(${PROJECT_NAME}_environment ${PROJECT_NAME}_gencfg)
 
+add_library(${PROJECT_NAME}_environment_shadow SHARED src/environment_monitor_shadow.cpp)
+target_link_libraries(${PROJECT_NAME}_environment_shadow PUBLIC tesseract::tesseract ${PROJECT_NAME}_environment ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+tesseract_target_compile_options(${PROJECT_NAME}_environment_shadow PUBLIC)
+tesseract_clang_tidy(${PROJECT_NAME}_environment_shadow)
+target_include_directories(${PROJECT_NAME}_environment_shadow PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>")
+target_include_directories(${PROJECT_NAME}_environment_shadow SYSTEM PUBLIC ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
+add_dependencies(${PROJECT_NAME}_environment_shadow ${PROJECT_NAME}_gencfg)
+
 add_executable(demo_scene demos/demo_scene.cpp)
 target_link_libraries(demo_scene PRIVATE ${PROJECT_NAME}_environment ${catkin_LIBRARIES})
 tesseract_target_compile_options(demo_scene PRIVATE)
@@ -87,7 +96,7 @@ target_include_directories(${PROJECT_NAME}_environment_node PUBLIC "$<BUILD_INTE
 target_include_directories(${PROJECT_NAME}_environment_node SYSTEM PUBLIC ${catkin_INCLUDE_DIRS})
 
 # Mark executables and/or libraries for installation
-install(TARGETS ${PROJECT_NAME}_environment ${PROJECT_NAME}_contacts ${PROJECT_NAME}_contacts_node ${PROJECT_NAME}_environment_node demo_scene
+install(TARGETS ${PROJECT_NAME}_environment ${PROJECT_NAME}_environment_shadow ${PROJECT_NAME}_contacts ${PROJECT_NAME}_contacts_node ${PROJECT_NAME}_environment_node demo_scene
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
