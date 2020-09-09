@@ -10,6 +10,8 @@ TESSERACT_COMMON_IGNORE_WARNINGS_PUSH
 #include <rviz/properties/enum_property.h>
 #include <rviz/window_manager_interface.h>
 
+#include <eigen_conversions/eigen_msg.h>
+
 #include <tesseract_rosutils/utils.h>
 TESSERACT_COMMON_IGNORE_WARNINGS_POP
 

@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.5.0)
 project(tesseract_rviz)
 
 find_package(catkin REQUIRED COMPONENTS
+  eigen_conversions
   roscpp
   message_generation
   tesseract_msgs
