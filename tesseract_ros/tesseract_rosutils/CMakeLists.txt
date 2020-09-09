@@ -44,10 +44,6 @@ catkin_package(
     tesseract_motion_planners
 )
 
-# Load clang tidy args and compiler options
-tesseract_clang_tidy_args()
-tesseract_compile_options()
-
 add_library(${PROJECT_NAME} SHARED src/plotting.cpp src/conversions.cpp src/utils.cpp)
 target_link_libraries(${PROJECT_NAME} PUBLIC tesseract::tesseract_scene_graph tesseract::tesseract_geometry tesseract::tesseract_collision_core tesseract::tesseract_visualization tesseract::tesseract_common tesseract::tesseract_motion_planners_core ${Boost_LIBRARIES} ${catkin_LIBRARIES})
 target_compile_options(${PROJECT_NAME} PRIVATE ${TESSERACT_COMPILE_OPTIONS})

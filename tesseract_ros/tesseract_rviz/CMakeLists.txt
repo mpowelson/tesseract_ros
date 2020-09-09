@@ -74,10 +74,6 @@ catkin_package(
     tesseract_common
 )
 
-# Load clang tidy args and compiler options
-tesseract_clang_tidy_args()
-tesseract_compile_options()
-
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}

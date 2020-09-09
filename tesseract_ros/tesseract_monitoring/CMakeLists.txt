@@ -49,10 +49,6 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-# Load clang tidy args and compiler options
-tesseract_clang_tidy_args()
-tesseract_compile_options()
-
 # Tesseract ROS Nodes
 add_library(${PROJECT_NAME}_contacts src/contact_monitor.cpp)
 target_link_libraries(${PROJECT_NAME}_contacts PRIVATE tesseract::tesseract ${catkin_LIBRARIES})
