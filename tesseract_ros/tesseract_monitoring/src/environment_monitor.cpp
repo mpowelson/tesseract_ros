@@ -783,8 +783,8 @@ void EnvironmentMonitor::updateEnvironmentWithCurrentState()
         (ros::Time::now() - current_state_monitor_->getMonitorStartTime()).toSec() > 1.0)
     {
       std::string missing_str = boost::algorithm::join(missing, ", ");
-      ROS_WARN_THROTTLE_NAMED(
-          1, monitor_namespace_, "The complete state of the robot is not yet known.  Missing %s", missing_str.c_str());
+//      ROS_WARN_THROTTLE_NAMED(
+//          1, LOGNAME, "The complete state of the robot is not yet known.  Missing %s", missing_str.c_str());
     }
 
     {
