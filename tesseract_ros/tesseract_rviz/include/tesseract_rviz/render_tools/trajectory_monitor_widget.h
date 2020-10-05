@@ -108,6 +108,9 @@ private Q_SLOTS:
   void changedTimeScale();
   void trajectorySliderPanelVisibilityChange(bool enable);
 
+public:
+  void incomingDisplayTrajectory(const tesseract_msgs::Trajectory::ConstPtr& msg);
+
 protected:
   void incomingDisplayTrajectory(const tesseract_msgs::Trajectory::ConstPtr& msg);
   void clearTrajectoryTrail();
